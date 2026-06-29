@@ -87,7 +87,7 @@ docker run --rm -it \
   -e SPOTIFY_CLIENT_SECRET=your_secret \
   -e SPOTIFY_REDIRECT_URI=http://NAS_IP:8888/callback \
   -e CONFIG_DIR=/config \
-  ghcr.io/youruser/zymphony:latest zymphony auth
+  jorgejiro/zymphony:latest zymphony auth
 ```
 
 Open the printed URL in your browser, authorize, and the token is saved.
@@ -237,7 +237,7 @@ docker buildx create --use --name multiarch --driver docker-container
 # Build and push both architectures in one step
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  -t youruser/zymphony:latest \
+  -t jorgejiro/zymphony:latest \
   --push \
   .
 ```

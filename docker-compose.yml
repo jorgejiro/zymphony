@@ -1,6 +1,6 @@
 services:
   zymphony:
-    image: ghcr.io/youruser/zymphony:latest
+    image: jorgejiro/zymphony:latest
     # build: .    # uncomment to build from source instead of pulling the image
     container_name: zymphony
     environment:
