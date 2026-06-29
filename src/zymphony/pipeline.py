@@ -37,11 +37,8 @@ def process_group(
     dest_dir = output_dir / folder_name
 
     if dest_dir.exists():
-        log.warning(
-            "Output folder already exists: %s — skipping to avoid overwrite.",
-            dest_dir,
-        )
-        return
+        log.info("Output folder already exists: %s — removing to replace with updated content.", dest_dir)
+        shutil.rmtree(dest_dir)
 
     with tempfile.TemporaryDirectory(prefix="zymphony_") as tmpdir:
         tmp = Path(tmpdir)
