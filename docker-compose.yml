@@ -24,7 +24,7 @@ services:
       - LOG_LEVEL=INFO
 
     volumes:
-      - /path/to/downloads:/input    # directory where Deezloader drops ZIP files
+      - /path/to/downloads:/input    # directory where ZIP files are dropped
       - /path/to/music:/output       # Navidrome music library root
       - /path/to/config:/config      # persistent: Spotify token + state
 
