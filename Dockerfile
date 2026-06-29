@@ -32,4 +32,4 @@ RUN chmod +x /entrypoint.sh
 VOLUME ["/input", "/output", "/config"]
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["deezload"]
+CMD ["zymphony"]

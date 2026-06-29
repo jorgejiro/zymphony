@@ -1,11 +1,11 @@
-"""Tests for deezload.scanner: completeness heuristic (evaluate_group)."""
+"""Tests for zymphony.scanner: completeness heuristic (evaluate_group)."""
 
 from pathlib import Path
 
 import pytest
 
-from deezload.naming import ZipPart
-from deezload.scanner import PartStats, Readiness, evaluate_group
+from zymphony.naming import ZipPart
+from zymphony.scanner import PartStats, Readiness, evaluate_group
 
 # ---------------------------------------------------------------------------
 # Helpers

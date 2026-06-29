@@ -15,7 +15,7 @@ from mutagen.id3 import (
     TRCK,
 )
 
-from deezload.naming import ZipPart
+from zymphony.naming import ZipPart
 
 log = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ def collect_mp3s(dest_dir: Path, parts: list[ZipPart]) -> list[Path]:
 
     Order: ascending part index, then case-insensitive alphabetical
     by filename within each part.  ``parts`` must already be sorted
-    (as returned by :func:`~deezload.naming.group_zips`).
+    (as returned by :func:`~zymphony.naming.group_zips`).
     """
     mp3s: list[Path] = []
     for part in parts:

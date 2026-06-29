@@ -1,4 +1,4 @@
-"""Tests for deezload.tagging: apply_tags, save_cover, collect_mp3s, extract_parts."""
+"""Tests for zymphony.tagging: apply_tags, save_cover, collect_mp3s, extract_parts."""
 
 import io
 import zipfile
@@ -20,8 +20,8 @@ from mutagen.id3 import (
     TYER,
 )
 
-from deezload.naming import ZipPart
-from deezload.tagging import apply_tags, collect_mp3s, extract_parts, save_cover
+from zymphony.naming import ZipPart
+from zymphony.tagging import apply_tags, collect_mp3s, extract_parts, save_cover
 
 PLAYLIST_ID = "7EAqBCOVkDZcbccjxZmgjp"
 

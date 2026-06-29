@@ -1,10 +1,10 @@
-"""Tests for deezload.naming: ID extraction, ZIP grouping, and folder sanitization."""
+"""Tests for zymphony.naming: ID extraction, ZIP grouping, and folder sanitization."""
 
 from pathlib import Path
 
 import pytest
 
-from deezload.naming import ZipPart, extract_playlist_id, group_zips, sanitize_folder_name
+from zymphony.naming import ZipPart, extract_playlist_id, group_zips, sanitize_folder_name
 
 # A valid Spotify playlist ID used throughout the tests.
 VALID_ID = "7EAqBCOVkDZcbccjxZmgjp"

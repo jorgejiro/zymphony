@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 
-from deezload.naming import ZipPart, group_zips
+from zymphony.naming import ZipPart, group_zips
 
 
 class Readiness(Enum):
@@ -34,7 +34,7 @@ def evaluate_group(
 
     ``parts`` and ``part_stats`` must be parallel lists of equal length,
     with ``parts`` sorted ascending by part index (as returned by
-    :func:`~deezload.naming.group_zips`).
+    :func:`~zymphony.naming.group_zips`).
     """
     if not parts:
         return Readiness.INCOMPLETE

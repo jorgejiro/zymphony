@@ -1,4 +1,4 @@
-# deezload-post-processing
+# Zymphony
 
 Docker service that watches a directory for Spotify playlist ZIPs downloaded
 by Deezloader, and automatically converts them into well-tagged music
@@ -42,7 +42,7 @@ cp docker-compose.yml docker-compose.local.yml
 
 # 2. Run the one-time authorization (on a machine with a browser — see below)
 docker compose -f docker-compose.local.yml run --rm \
-  -p 8888:8888 deezload-post deezload auth
+  -p 8888:8888 zymphony zymphony auth
 
 # 3. Start the service
 docker compose -f docker-compose.local.yml up -d
@@ -65,14 +65,14 @@ CONFIG_DIR=/path/to/config \
 SPOTIFY_CLIENT_ID=your_id \
 SPOTIFY_CLIENT_SECRET=your_secret \
 SPOTIFY_REDIRECT_URI=http://localhost:8888/callback \
-pip install deezload-post-processing && deezload auth
+pip install zymphony && zymphony auth
 ```
 
 Then copy `spotify_token.json` to the NAS config volume:
 
 ```bash
 scp /path/to/config/spotify_token.json \
-    user@NAS_IP:/volume1/docker/deezload-post/config/
+    user@NAS_IP:/volume1/docker/zymphony/config/
 ```
 
 ### Option B — bootstrap in Docker on the NAS
@@ -84,12 +84,12 @@ register that URI in your Spotify app settings first:
 # On the NAS via SSH:
 docker run --rm -it \
   -p 8888:8888 \
-  -v /volume1/docker/deezload-post/config:/config \
+  -v /volume1/docker/zymphony/config:/config \
   -e SPOTIFY_CLIENT_ID=your_id \
   -e SPOTIFY_CLIENT_SECRET=your_secret \
   -e SPOTIFY_REDIRECT_URI=http://NAS_IP:8888/callback \
   -e CONFIG_DIR=/config \
-  ghcr.io/youruser/deezload-post-processing:latest deezload auth
+  ghcr.io/youruser/zymphony:latest zymphony auth
 ```
 
 Open the printed URL in your browser, authorize, and the token is saved.
@@ -139,20 +139,20 @@ Use `uid` as `PUID` and `gid` as `PGID`.
 ├── downloads/          → /input   (where Deezloader saves ZIPs)
 ├── music/              → /output  (Navidrome library root)
 └── docker/
-    └── deezload-post/
+    └── zymphony/
         └── config/     → /config  (Spotify token + state)
 ```
 
 Create the config folder in advance:
 
 ```bash
-mkdir -p /volume1/docker/deezload-post/config
+mkdir -p /volume1/docker/zymphony/config
 ```
 
 ### Via Container Manager (DSM 7.2+)
 
 1. Open **Container Manager → Project → Create**.
-2. Choose a project name (e.g. `deezload-post`).
+2. Choose a project name (e.g. `zymphony`).
 3. Paste or import the contents of `docker-compose.yml`.
 4. Edit the volume paths and credentials, then click **Next → Done**.
 
@@ -160,8 +160,8 @@ mkdir -p /volume1/docker/deezload-post/config
 
 ```bash
 # On the NAS
-mkdir -p /volume1/docker/deezload-post
-cd /volume1/docker/deezload-post
+mkdir -p /volume1/docker/zymphony
+cd /volume1/docker/zymphony
 
 # Download or create docker-compose.yml with your values, then:
 docker compose up -d
@@ -170,7 +170,7 @@ docker compose up -d
 ### Check logs
 
 ```bash
-docker compose logs -f deezload-post
+docker compose logs -f zymphony
 ```
 
 ---
@@ -180,7 +180,7 @@ docker compose logs -f deezload-post
 ### Local build (single arch)
 
 ```bash
-docker build -t deezload-post-processing:latest .
+docker build -t zymphony:latest .
 ```
 
 ### Multi-arch build and push (amd64 + arm64)
@@ -192,7 +192,7 @@ docker buildx create --use --name multiarch --driver docker-container
 # Build and push both architectures in one step
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  -t youruser/deezload-post-processing:latest \
+  -t youruser/zymphony:latest \
   --push \
   .
 ```
@@ -221,5 +221,5 @@ export SPOTIFY_CLIENT_SECRET=your_secret
 export SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 export CONFIG_DIR=./local-config
 mkdir -p ./local-config
-deezload auth
+zymphony auth
 ```

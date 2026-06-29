@@ -1,4 +1,4 @@
-"""Tests for deezload.spotify: SpotifyClient (mocked API)."""
+"""Tests for zymphony.spotify: SpotifyClient (mocked API)."""
 
 import json
 from pathlib import Path
@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from deezload.spotify import PlaylistInfo, SpotifyClient
+from zymphony.spotify import PlaylistInfo, SpotifyClient
 
 PLAYLIST_ID = "7EAqBCOVkDZcbccjxZmgjp"
 COVER_URL = "https://i.scdn.co/image/ab67616d0000b273example"
@@ -46,7 +46,7 @@ def _write_token(config_dir: Path) -> None:
 def _make_client(tmp_path: Path) -> SpotifyClient:
     _write_token(tmp_path)
     config = _fake_config(tmp_path)
-    with patch("deezload.spotify.spotipy.Spotify"):
+    with patch("zymphony.spotify.spotipy.Spotify"):
         client = SpotifyClient(config)
     # Replace internal spotipy instance with a plain MagicMock.
     client._sp = MagicMock()
@@ -115,7 +115,7 @@ class TestDownloadCover:
     def test_returns_response_bytes(self, tmp_path):
         client = _make_client(tmp_path)
         fake_bytes = b"\xff\xd8\xff fake jpeg data"
-        with patch("deezload.spotify.requests.get") as mock_get:
+        with patch("zymphony.spotify.requests.get") as mock_get:
             mock_get.return_value.content = fake_bytes
             mock_get.return_value.raise_for_status = MagicMock()
             result = client.download_cover(COVER_URL)
@@ -123,7 +123,7 @@ class TestDownloadCover:
 
     def test_passes_correct_url(self, tmp_path):
         client = _make_client(tmp_path)
-        with patch("deezload.spotify.requests.get") as mock_get:
+        with patch("zymphony.spotify.requests.get") as mock_get:
             mock_get.return_value.content = b""
             mock_get.return_value.raise_for_status = MagicMock()
             client.download_cover(COVER_URL)
@@ -131,7 +131,7 @@ class TestDownloadCover:
 
     def test_raises_on_http_error(self, tmp_path):
         client = _make_client(tmp_path)
-        with patch("deezload.spotify.requests.get") as mock_get:
+        with patch("zymphony.spotify.requests.get") as mock_get:
             mock_get.return_value.raise_for_status.side_effect = Exception("HTTP 404")
             with pytest.raises(Exception, match="HTTP 404"):
                 client.download_cover(COVER_URL)
@@ -145,12 +145,12 @@ class TestDownloadCover:
 class TestSpotifyClientInit:
     def test_raises_when_token_file_missing(self, tmp_path):
         config = _fake_config(tmp_path)
-        with pytest.raises(FileNotFoundError, match="deezload auth"):
+        with pytest.raises(FileNotFoundError, match="zymphony auth"):
             SpotifyClient(config)
 
     def test_succeeds_when_token_file_present(self, tmp_path):
         _write_token(tmp_path)
         config = _fake_config(tmp_path)
-        with patch("deezload.spotify.spotipy.Spotify"):
+        with patch("zymphony.spotify.spotipy.Spotify"):
             client = SpotifyClient(config)
         assert client is not None

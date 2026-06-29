@@ -7,10 +7,10 @@ import sys
 from pathlib import Path
 from threading import Event
 
-from deezload.config import load_config
-from deezload.pipeline import process_group
-from deezload.scanner import Readiness, scan_input_dir
-from deezload.spotify import SpotifyClient, TOKEN_FILENAME, bootstrap_auth
+from zymphony.config import load_config
+from zymphony.pipeline import process_group
+from zymphony.scanner import Readiness, scan_input_dir
+from zymphony.spotify import SpotifyClient, TOKEN_FILENAME, bootstrap_auth
 
 log = logging.getLogger(__name__)
 
@@ -57,7 +57,7 @@ def _scan_cycle(config, spotify: SpotifyClient, input_dir: Path, output_dir: Pat
         log.error("Cannot scan input directory %s: %s", input_dir, exc)
         return
 
-    from deezload.naming import group_zips
+    from zymphony.naming import group_zips
 
     groups = group_zips(p for p in input_dir.iterdir() if p.is_file())
 
@@ -88,7 +88,7 @@ def _scan_cycle(config, spotify: SpotifyClient, input_dir: Path, output_dir: Pat
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="deezload",
+        prog="zymphony",
         description="Post-process Spotify playlist ZIPs into tagged compilations.",
     )
     sub = parser.add_subparsers(dest="cmd")
@@ -113,7 +113,7 @@ def main() -> None:
     token_file = Path(config.config_dir) / TOKEN_FILENAME
     if not token_file.exists():
         log.error(
-            "Spotify token not found at %s.  Run 'deezload auth' first.", token_file
+            "Spotify token not found at %s.  Run 'zymphony auth' first.", token_file
         )
         sys.exit(1)
 

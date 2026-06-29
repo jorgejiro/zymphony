@@ -94,7 +94,7 @@ def bootstrap_auth(config, *, force: bool = False) -> None:
     server = http.server.HTTPServer(("", port), _Handler)
     server.timeout = 2  # short poll so we check `done` frequently
 
-    print(f"\nOpen this URL in your browser to authorize Deezload:\n\n  {auth_url}\n")
+    print(f"\nOpen this URL in your browser to authorize Zymphony:\n\n  {auth_url}\n")
     try:
         webbrowser.open(auth_url)
         print("(Browser opened automatically.  If nothing happened, copy the URL above.)")
@@ -130,7 +130,7 @@ class SpotifyClient:
         if not token_file.exists():
             raise FileNotFoundError(
                 f"Spotify token not found at {token_file}.  "
-                "Run 'deezload auth' first."
+                "Run 'zymphony auth' first."
             )
         self._sp = spotipy.Spotify(auth_manager=_make_oauth(config))
 

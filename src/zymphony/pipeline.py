@@ -5,9 +5,9 @@ import shutil
 import tempfile
 from pathlib import Path
 
-from deezload.naming import ZipPart, sanitize_folder_name
-from deezload.spotify import SpotifyClient
-from deezload.tagging import apply_tags, collect_mp3s, extract_parts, save_cover
+from zymphony.naming import ZipPart, sanitize_folder_name
+from zymphony.spotify import SpotifyClient
+from zymphony.tagging import apply_tags, collect_mp3s, extract_parts, save_cover
 
 log = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ def process_group(
         )
         return
 
-    with tempfile.TemporaryDirectory(prefix="deezload_") as tmpdir:
+    with tempfile.TemporaryDirectory(prefix="zymphony_") as tmpdir:
         tmp = Path(tmpdir)
 
         extract_parts(parts, tmp)

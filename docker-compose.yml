@@ -1,8 +1,8 @@
 services:
-  deezload-post:
-    image: ghcr.io/youruser/deezload-post-processing:latest
+  zymphony:
+    image: ghcr.io/youruser/zymphony:latest
     # build: .    # uncomment to build from source instead of pulling the image
-    container_name: deezload-post
+    container_name: zymphony
     environment:
       # --- Permissions ---
       - PUID=1000          # UID of the user that owns the music library

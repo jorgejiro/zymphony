@@ -1,4 +1,4 @@
-"""Tests for deezload.pipeline: process_group orchestration."""
+"""Tests for zymphony.pipeline: process_group orchestration."""
 
 import zipfile
 from pathlib import Path
@@ -7,9 +7,9 @@ from unittest.mock import MagicMock
 import pytest
 from mutagen.id3 import ID3, TALB, TIT2, TPE1
 
-from deezload.naming import ZipPart
-from deezload.pipeline import process_group
-from deezload.spotify import PlaylistInfo
+from zymphony.naming import ZipPart
+from zymphony.pipeline import process_group
+from zymphony.spotify import PlaylistInfo
 
 PLAYLIST_ID = "7EAqBCOVkDZcbccjxZmgjp"
 PLAYLIST_NAME = "My Test Playlist"
